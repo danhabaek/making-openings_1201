@@ -41,7 +41,7 @@
   function resizeHome() {
     if (!stage || !homeInner) return;
 
-    const DESIGN_HEIGHT = 760; // CSS에서 .home-inner 기준 높이
+    const DESIGN_HEIGHT = 775; // CSS에서 .home-inner 기준 높이
     const framePadding = 30; // main 상하 padding(15px * 2) 정도
 
     const availableHeight = window.innerHeight - framePadding;
