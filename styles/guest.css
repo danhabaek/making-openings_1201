@@ -34,6 +34,7 @@ body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
+  overflow: hidden;
 }
 
 body {
@@ -83,7 +84,7 @@ main {
   position: absolute;
   width: 25px;
   height: 22px;
-  top: 61px;
+  top: 51px;
   left: 23px;
 }
 
@@ -91,7 +92,7 @@ main {
    To. (순서: 1)
    ========================= */
 .to {
-  margin-top: 62px;
+  margin-top: 52px;
   color: var(--fg-white);
   font-family: var(--title-font);
   font-size: 20px;
@@ -171,7 +172,7 @@ main {
   border: 2pt solid var(--fg-white);
   z-index: 999;
   position: absolute;
-  top: 492px; /* 원하는 만큼 위로 올림 */
+  top: 478px; /* 원하는 만큼 위로 올림 */
   right: 10px; /* 기존 align-self: flex-end 역할 대신 */
   z-index: 10; /* 텍스트 영역보다 위 */
 }
