@@ -47,7 +47,7 @@
       document.body.style.backgroundPosition = "center -100px";
       document.body.style.backgroundSize = "cover"; // 필요하면 cover로 변경
       // 필요하면 배경색도 여기서 지정 가능
-      document.body.style.backgroundColor = "#ff43b7";
+      document.body.style.backgroundColor = "#FF319C";
     }
   }
 
