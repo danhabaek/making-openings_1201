@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Making Openings</title>
+    <link rel="stylesheet" href="../styles/project.css" />
+  </head>
+
+  <body>
+    <header>
+      <div class="number">
+        <h1>14</h1>
+      </div>
+
+      <button class="btn-close" onclick="location.href='../home.html'">
+        <img src="../assets/svg/button-close.svg" />
+      </button>
+    </header>
+
+    <main>
+      <div class="info-wrap">
+        <div class="project-wrap">
+          <div class="project-name">
+            <h1>lowkey</h1>
+          </div>
+          <div class="student-name">
+            <h3>강효원<span class="name-en">Hyowon Kang</span></h3>
+            <h3>류현비<span class="name-en">Hyunbi Ryu</span></h3>
+          </div>
+
+          <button class="btn-write">
+            <img src="../assets/svg/button-write.svg" />
+          </button>
+        </div>
+
+        <div class="guestbook-wrap">
+          <button class="btn-guestbook">
+            <img src="../assets/svg/button14-guestbook.svg" />
+          </button>
+        </div>
+      </div>
+
+      <div class="image-main">
+        <img src="../archive/p14/main.png" />
+      </div>
+
+      <div class="text-wrap">
+        <div class="text-kr">
+          당신에게 일어날 행운을 미리 알 수 있다면 어떻게 하시겠습니까? lowkey는
+          AI와 행운 빅데이터의 절대적 계산을 통해 당신의 하루에 찾아올 필연적인
+          행운을 예측합니다. lowkey로 당신의 행운을 부화시키세요.<br />
+          솔직히, 당신도 행운을 원하잖아요?
+        </div>
+        <div class="text-en">
+          What if you could foresee the luck waiting for you? lowkey predicts
+          the inevitable fortune that will find its way into your day through
+          absolute calculation — powered by AI and big data of luck.<br />
+          get lowkey. hatch your luck.
+        </div>
+      </div>
+
+      <div class="contact-wrap">
+        <span class="contact-title">Contact</span>
+        <div class="contact-info">
+          <div class="contact-row">
+            <span class="person-name">강효원</span>
+            <a
+              class="instagram"
+              href="https://www.instagram.com/crclnyo"
+              target="_blank"
+              >@crclnyo</a
+            >
+          </div>
+
+          <div class="contact-row">
+            <span class="person-name">류현비</span>
+            <a
+              class="instagram"
+              href="https://www.instagram.com/ryuhibye"
+              target="_blank"
+              >@ryuhibye</a
+            >
+            <a class="email" href="mailto:ryuhibye@gmail.com">
+              ryuhibye@gmail.com
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="image-wrap">
+        <img src="../archive/p14/1.png" />
+        <img src="../archive/p14/2.png" />
+        <div
+          style="
+            position: relative;
+            width: 100%;
+            max-width: 800px; /* 일반 유튜브 가로폭 느낌 */
+            aspect-ratio: 16 / 9;
+            margin: 0 auto;
+            background: #000; /* 좌우 여백을 검정으로 */
+          "
+        >
+          <iframe
+            src="https://www.youtube.com/embed/jRFLpqmkWlg"
+            allowfullscreen
+            style="
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              width: 56.25%; /* 9/16 = 0.5625 → 56.25% */
+              height: 100%;
+              transform: translate(-50%, -50%);
+              border: 0;
+            "
+          ></iframe>
+        </div>
+        <div
+          style="
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 비율 유지 (9 / 16 * 100) */
+            height: 0;
+            overflow: hidden;
+          "
+        >
+          <iframe
+            src="https://www.youtube.com/embed/SqdQzfNNAlo?si=s2vE2Edan5EKvhqW"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen
+            style="
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+            "
+          ></iframe>
+        </div>
+      </div>
+    </main>
+
+    <script src="../scripts/project.js"></script>
+  </body>
+</html>

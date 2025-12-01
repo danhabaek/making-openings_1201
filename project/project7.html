@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Making Openings</title>
+    <link rel="stylesheet" href="../styles/project.css" />
+  </head>
+
+  <body>
+    <header>
+      <div class="number">
+        <h1>7</h1>
+      </div>
+
+      <button class="btn-close" onclick="location.href='../home.html'">
+        <img src="../assets/svg/button-close.svg" />
+      </button>
+    </header>
+
+    <main>
+      <div class="info-wrap">
+        <div class="project-wrap">
+          <div class="project-name">
+            <h1>SYNC</h1>
+          </div>
+          <div class="student-name">
+            <h3>김민재<span class="name-en">Minjae Kim</span></h3>
+          </div>
+          <button class="btn-write">
+            <img src="../assets/svg/button-write.svg" />
+          </button>
+        </div>
+
+        <div class="guestbook-wrap">
+          <button class="btn-guestbook">
+            <img src="../assets/svg/button7-guestbook.svg" />
+          </button>
+        </div>
+      </div>
+
+      <div class="image-main">
+        <img src="../archive/p7/main.png" />
+      </div>
+
+      <div class="text-wrap">
+        <div class="text-kr">
+          SYNC는 현실과 버추얼의 경계를 허무는 새로운 아이돌 서바이벌입니다.
+          30명의 연습생이 데이터로만 존재하던 버추얼 아이돌의 '본체'가 되기 위해
+          경쟁하며 현실과 정체성을 연결하는 서바이벌 패러다임을 완성합니다.
+          당신의 아이돌을 연결해보세요, SYNC YOUR IDOL!
+        </div>
+        <div class="text-en">
+          SYNC is a next-gen idol survival show that fuses reality and the
+          virtual world. Trainees compete to embody virtual idols born from
+          data, creating a new link between existence and identity. SYNC YOUR
+          IDOL!
+        </div>
+      </div>
+
+      <div class="contact-wrap">
+        <span class="contact-title">Contact</span>
+        <div class="contact-info">
+          <div class="contact-row">
+            <span class="person-name">김민재</span>
+            <a
+              class="instagram"
+              href="https://www.instagram.com/min_zzae"
+              target="_blank"
+              >@min_zzae</a
+            >
+          </div>
+        </div>
+      </div>
+
+      <div class="image-wrap">
+        <img src="../archive/p7/1.png" />
+        <img src="../archive/p7/2.png" />
+        <img src="../archive/p7/3.png" />
+        <div
+          style="
+            position: relative;
+            width: 100%;
+            max-width: 800px; /* 일반 유튜브 가로폭 느낌 */
+            aspect-ratio: 16 / 9;
+            margin: 0 auto;
+            background: #000; /* 좌우 여백을 검정으로 */
+          "
+        >
+          <iframe
+            src="https://www.youtube.com/embed/2NRsrR53aZU"
+            allowfullscreen
+            style="
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              width: 56.25%; /* 9/16 = 0.5625 → 56.25% */
+              height: 100%;
+              transform: translate(-50%, -50%);
+              border: 0;
+            "
+          ></iframe>
+        </div>
+      </div>
+    </main>
+
+    <script src="../scripts/project.js"></script>
+  </body>
+</html>

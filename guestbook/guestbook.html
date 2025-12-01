@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Making Openings</title>
+    <link rel="stylesheet" href="../styles/guestbook.css" />
+  </head>
+
+  <body>
+    <header>
+      <!-- 닫기 버튼: 중앙에 위치함 -->
+      <button class="btn-close" id="toProject">
+        <img
+          src="../assets/svg/button-close.svg"
+          alt="프로젝트 페이지로 이동"
+        />
+      </button>
+    </header>
+
+    <main>
+      <h1>
+        TO.<br />
+        <span class="project-title"></span>
+      </h1>
+
+      <ul id="list">
+        <!-- JS가 데이터를 로드하여 여기에 리스트 항목을 삽입합니다. -->
+      </ul>
+
+      <!-- 방명록이 없을 때 메시지 -->
+      <p class="empty" id="empty" style="display: none">
+        아직 작성된 방명록이 없습니다.
+      </p>
+    </main>
+
+    <!-- 🚨 주의: 아래 두 스크립트 태그는 사용자 환경에 따라 Supabase 클라이언트가 정의되도록 필요합니다. -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../scripts/client.js"></script>
+
+    <!-- 분리된 JS 파일 연결 -->
+    <script src="../scripts/guestbook.js"></script>
+  </body>
+</html>

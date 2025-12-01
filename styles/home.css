@@ -1,0 +1,248 @@
+:root {
+  /* color */
+  --bg: #e6e7e8;
+  --fg: #ff319c;
+}
+
+/* ===== 기본 레이아웃 ===== */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100dvh; /* iOS/Android 최신 표준 — 실제 보이는 높이 */
+  overflow: hidden; /* 스크롤 강제 차단 */
+}
+
+/* ===== 스플래시 ===== */
+#splash {
+  position: fixed;
+  inset: 0; /* top:0; right:0; bottom:0; left:0 와 같음 */
+  width: 100vw;
+  height: 100vh;
+  display: none; /* JS에서 .is-active 붙일 때만 보임 */
+  z-index: 9999;
+  background-color: transparent; /* JS에서 처음 2초간 핑크로 변경 */
+}
+
+#splash.is-active {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#splash .lottie {
+  width: 100%;
+  height: 100%;
+}
+
+/* ===== 핑크 프레임(main) ===== */
+main {
+  position: relative;
+  /* max-width: 420px;  */
+  width: 100%;
+  margin: 0 auto;
+  padding: 15px; /* 프레임 두께 */
+  box-sizing: border-box;
+  background: var(--fg);
+  height: 100dvh; /* 전체 화면 딱 맞추기 */
+  overflow: hidden;
+}
+
+/* ===== 좌측 상단 핑크 네모 (회색 라운딩 일부 가리는 블록) ===== */
+.corner-block {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  width: 28px; /* 피그마 보면서 조정 가능 */
+  height: 69px;
+  background: var(--fg);
+  /* border-bottom-right-radius: 40px; */
+  z-index: 2;
+}
+
+/* ===== 홈 스테이지 (안쪽 회색 라운딩 화면) ===== */
+.stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: var(--bg); /* 항상 회색 배경 */
+  border-radius: 0 40px 40px 40px;
+  height: calc(100dvh - 30px); /* 프레임 padding 계산 들어가면 조정 가능 */
+}
+
+/* 🔥 아이콘 보드: 실제 아트보드 사이즈로 고정 */
+.icon-board {
+  position: relative; /* 안의 .icon absolute 기준 */
+  width: 358px; /* 피그마에서 본 그 값 */
+  height: 574px; /* 필요하면 조정 */
+  margin: 0 auto; /* 가로 가운데 정렬 */
+  margin-top: -90px;
+}
+
+/* ===== 상단 인포 이미지 ===== */
+.info-home {
+  display: block;
+  width: 100%;
+  max-width: 358px; /* 🔥 icon-board와 같은 폭으로 고정 */
+  margin: 40px auto 0; /* 🔥 가운데 정렬 + 위에서 40px */
+  height: auto;
+  z-index: 999;
+}
+/* ===== 아이콘 공통 ===== */
+.icon {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  cursor: pointer;
+}
+
+.icon .outline {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* 클릭 후 사진이 보이는 레이어 */
+.icon .fill {
+  position: absolute;
+  inset: 0;
+  display: none;
+  opacity: 0;
+  background-color: black;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-position: center;
+  mask-position: center;
+  transition: opacity 0.25s ease;
+}
+
+/* 방문한 아이콘 */
+.icon.visited .fill {
+  display: block;
+  opacity: 1;
+}
+
+/* 방문한 아이콘은 라인 완전히 숨기기 */
+.icon.visited .outline {
+  opacity: 0;
+}
+
+/* ===== 크레딧 아이콘 ===== */
+.credit {
+  position: absolute;
+  left: 14px;
+  bottom: 28px;
+  width: 170px;
+  display: block;
+  animation: bob 2s ease-in-out infinite;
+}
+
+.credit .solid {
+  width: 117px;
+  height: auto;
+}
+
+@keyframes bob {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* ===== 아이콘 개별 위치 ===== */
+.icon[data-id="1"] {
+  top: 384px;
+  left: 212px;
+  width: 88.693px;
+  /* height: 110px; */
+}
+.icon[data-id="2"] {
+  top: 81.35px;
+  left: 94.08px;
+  width: 81px;
+}
+.icon[data-id="3"] {
+  top: 207px;
+  left: 252px;
+  width: 84px;
+}
+.icon[data-id="4"] {
+  top: 267.85px;
+  left: 149.5px;
+  width: 106.522px;
+}
+.icon[data-id="5"] {
+  top: 256px;
+  left: 18px;
+  width: 90.004px;
+}
+.icon[data-id="6"] {
+  top: 148px;
+  left: 180px;
+  width: 68.193px;
+}
+.icon[data-id="7"] {
+  top: 462px;
+  left: 245px;
+  width: 79.84px;
+}
+.icon[data-id="8"] {
+  top: 0px;
+  left: 241px;
+  width: 87.232px;
+}
+.icon[data-id="9"] {
+  top: 365px;
+  left: 28px;
+  width: 76.913px;
+}
+.icon[data-id="10"] {
+  top: 201px;
+  left: 104px;
+  width: 66.386px;
+}
+.icon[data-id="11"] {
+  top: 105px;
+  left: 266px;
+  width: 67.986px;
+}
+.icon[data-id="12"] {
+  top: 313px;
+  left: 260px;
+  width: 83.885px;
+}
+.icon[data-id="13"] {
+  top: 456px;
+  left: 139px;
+  width: 89.818px;
+}
+.icon[data-id="14"] {
+  top: 50px;
+  left: 173px;
+  width: 92.316px;
+}
+.icon[data-id="15"] {
+  top: 344px;
+  left: 108px;
+  width: 88.174px;
+}
+.icon[data-id="16"] {
+  top: 140.05px;
+  left: 12.63px;
+  width: 100.423px;
+}

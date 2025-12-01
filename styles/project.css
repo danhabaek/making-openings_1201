@@ -1,0 +1,275 @@
+/* =========================
+   Font & Root
+   ========================= */
+@font-face {
+  font-family: "ABC Maxi Round";
+  src: url("../assets/fonts/ABCMaxiRound-Bold.woff2") format("woff2");
+}
+
+:root {
+  /* color */
+  --bg: #e6e7e8;
+  --fg: #ff319c;
+
+  /* size */
+  --page-max: 390px;
+  --pad: 20px;
+
+  /* font */
+  --title-font: "ABC Maxi Round";
+  --body-font: "Apple SD Gothic Neo";
+
+  /* font size */
+  --font-title: 30px;
+  --font-body: 16px;
+}
+
+/* =========================
+   Reset & Base
+   ========================= */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--body-font);
+  color: #000000;
+  background: var(--bg);
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+button {
+  border: none;
+  padding: 0;
+  margin: 0;
+  background: none;
+  cursor: pointer;
+}
+
+/* =========================
+   Layout: Header & Main
+   ========================= */
+header {
+  margin: 0 auto;
+  padding: 52px var(--pad) 0px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+main {
+  margin: 0 auto;
+  padding: 0 var(--pad) 40px;
+}
+
+/* =========================
+   Header
+   ========================= */
+.number h1 {
+  font-size: 28px;
+  margin: 0;
+  color: var(--fg);
+  font-family: var(--title-font);
+}
+
+.btn-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-close img {
+  width: 21.91px;
+  height: auto;
+}
+
+/* =========================
+   Info 영역 (프로젝트 정보 + 방명록 버튼)
+   ========================= */
+.info-wrap {
+  display: flex;
+  justify-content: space-between; /* 왼쪽 project-wrap, 오른쪽 guestbook-wrap */
+  align-items: flex-start;
+}
+
+/* project-name / student-name / btn-write 세로 정렬 */
+.project-wrap {
+  display: flex;
+  flex-direction: column;
+  flex: 1; /* 남는 공간 채우기 */
+}
+
+.project-name h1 {
+  font-size: 30px;
+  margin: 0;
+  margin-bottom: 10px;
+  font-family: var(--title-font);
+  color: var(--fg);
+}
+
+/* .student-name h3 {
+  margin: 0;
+  font-size: 16px;
+  margin-bottom: 39px;
+} */
+
+.student-name {
+  margin-bottom: 39px; /* 전체 블록 간격 */
+}
+
+.student-name h3 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.student-name h3 + h3 {
+  margin-top: 4px; /* 두 번째 이름부터 약간 간격 */
+}
+
+.student-name .name-en {
+  margin-left: 4px;
+  font-size: 16px;
+  color: var(--fg);
+  letter-spacing: -0.15px;
+}
+
+/* 방명록 버튼 오른쪽 정렬 */
+.guestbook-wrap {
+  display: flex;
+  align-items: flex-start;
+}
+
+.btn-write img {
+  width: 113.77px;
+  height: auto;
+}
+
+.btn-guestbook img {
+  height: auto;
+  width: 144.0699px;
+}
+
+/* =========================
+   텍스트 블록
+   ========================= */
+.text-wrap {
+  margin-top: 46px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  font-size: 16px;
+  line-height: 1.6;
+  word-break: keep-all;
+  letter-spacing: -0.15px;
+}
+
+/* div.text-kr, div.text-en에 직접 적용 */
+.text-en {
+  margin-top: 10px;
+  font-size: 18px;
+  line-height: 1.36;
+  word-break: keep-all;
+  letter-spacing: -0.27px;
+}
+
+/* =========================
+   Contact
+   ========================= */
+.contact-wrap {
+  margin-top: 46px;
+  font-size: 14px;
+}
+
+.contact-title {
+  font-family: var(--title-font);
+  font-size: 20px;
+  color: var(--fg);
+  display: block;
+  margin-bottom: 11px;
+}
+
+/* 여러 줄의 row를 수직으로 쌓는 컨테이너 */
+.contact-info {
+  font-size: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  letter-spacing: -0.2px;
+}
+
+/* 각 사람 한 줄(row) */
+.contact-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
+/* 인스타 링크 */
+.instagram {
+  color: inherit;
+  text-decoration: underline;
+  margin-left: 9px;
+}
+
+/* 이메일 */
+.email {
+  text-decoration: underline;
+  margin-left: auto;
+}
+
+.email,
+.email:visited,
+.email:hover,
+.email:active {
+  color: #000 !important;
+  text-decoration: underline !important;
+}
+
+/* 인스타 색 고정 */
+.instagram,
+.instagram:visited,
+.instagram:hover,
+.instagram:active {
+  color: #000 !important;
+  text-decoration: underline !important;
+}
+
+/* =========================
+   이미지들
+   ========================= */
+/* 메인 이미지: 양쪽 끝까지 풀블리드 */
+.image-main {
+  margin: 29.28px 0;
+  margin-left: calc(-1 * var(--pad)); /* main의 padding 20px 상쇄 */
+  margin-right: calc(-1 * var(--pad));
+}
+
+.image-main img {
+  width: 100%;
+  height: auto;
+}
+
+/* 아래 이미지 리스트: 세로 flex 컨테이너 */
+.image-wrap {
+  margin-top: 17px;
+  display: flex;
+  flex-direction: column; /* 수직으로 쌓기 */
+  gap: 10px;
+}
+
+.image-wrap img {
+  width: 100%;
+  height: auto;
+}

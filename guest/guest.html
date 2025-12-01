@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Making Openings</title>
+    <link rel="stylesheet" href="../styles/guest.css" />
+  </head>
+
+  <body>
+    <header>
+      <button class="btn-back" onclick="history.back()">
+        <img src="../assets/svg/button-back.svg" />
+      </button>
+    </header>
+
+    <main>
+      <div class="to">
+        <h1>TO. <br /><span class="project-title"></span></h1>
+      </div>
+
+      <label class="textarea-wrap">
+        <textarea
+          class="content"
+          maxlength="80"
+          placeholder="따뜻한 메시지를 남겨주세요!(최대 80자)"
+        ></textarea>
+      </label>
+
+      <label class="name-wrap">
+        <span class="name-label">From.</span>
+        <input
+          class="from"
+          maxlength="10"
+          placeholder="닉네임을 적어주세요.(최대 10자)"
+        />
+      </label>
+
+      <button class="btn-send" id="toGuestbook">
+        <img src="../assets/svg/button-send.svg" />
+      </button>
+      <div class="err"></div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../scripts/client.js"></script>
+    <script src="../scripts/guest.js"></script>
+  </body>
+</html>

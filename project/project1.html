@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Making Openings</title>
+    <link rel="stylesheet" href="../styles/project.css" />
+  </head>
+
+  <body>
+    <header>
+      <div class="number">
+        <h1>1</h1>
+      </div>
+
+      <button class="btn-close" onclick="location.href='../home.html'">
+        <img src="../assets/svg/button-close.svg" />
+      </button>
+    </header>
+
+    <main>
+      <div class="info-wrap">
+        <div class="project-wrap">
+          <div class="project-name">
+            <h1>carrihome</h1>
+          </div>
+          <div class="student-name">
+            <h3>조윤서<span class="name-en">Yoonseo Jo</span></h3>
+          </div>
+          <button class="btn-write">
+            <img src="../assets/svg/button-write.svg" />
+          </button>
+        </div>
+
+        <div class="guestbook-wrap">
+          <button class="btn-guestbook">
+            <img src="../assets/svg/button1-guestbook.svg" />
+          </button>
+        </div>
+      </div>
+
+      <div class="image-main">
+        <img src="../archive/p1/main.jpg" />
+      </div>
+
+      <div class="text-wrap">
+        <div class="text-kr">
+          낯선 여행지에서 익숙한 맛을 꺼내는 순간, 그 따뜻한 한 입이 집을
+          떠올리게 합니다. 예기치 못한 일정과 새로운 환경 속, 반복되는 외식에
+          지칠 때면, carrihome은 한국인의 입맛과 정서를 담은 작고 든든한 한 끼
+          식품을 전합니다.
+        </div>
+        <div class="text-en">
+          While traveling, a familiar taste brings home back to you. Carrihome
+          offers a small but hearty meal comforting in both flavor and feeling. 
+        </div>
+      </div>
+
+      <div class="contact-wrap">
+        <span class="contact-title">Contact</span>
+        <div class="contact-info">
+          <div class="contact-row">
+            <span class="person-name">조윤서</span>
+            <a
+              class="instagram"
+              href="https://www.instagram.com/joy2oo2nseo"
+              target="_blank"
+              >@joy2oo2nseo</a
+            >
+            <a class="email" href="mailto:josophia8854@gmail.com">
+              josophia8854@gmail.com
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="image-wrap">
+        <img src="../archive/p1/1.jpg" />
+        <img src="../archive/p1/2.jpg" />
+        <div
+          style="
+            position: relative;
+            width: 100%;
+            max-width: 800px; /* 일반 유튜브 가로폭 느낌 */
+            aspect-ratio: 16 / 9;
+            margin: 0 auto;
+            background: #000; /* 좌우 여백을 검정으로 */
+          "
+        >
+          <iframe
+            src="https://www.youtube.com/embed/q8dvZtCAp3s"
+            allowfullscreen
+            style="
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              width: 56.25%; /* 9/16 = 0.5625 → 56.25% */
+              height: 100%;
+              transform: translate(-50%, -50%);
+              border: 0;
+            "
+          ></iframe>
+        </div>
+      </div>
+    </main>
+
+    <script src="../scripts/project.js"></script>
+  </body>
+</html>

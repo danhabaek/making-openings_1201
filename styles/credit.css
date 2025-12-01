@@ -1,0 +1,317 @@
+@font-face {
+  font-family: "ABC Maxi Round";
+  src: url("../assets/fonts/ABCMaxiRound-Bold.woff2") format("woff2");
+}
+
+:root {
+  /* color */
+  --bg: #e6e7e8;
+  --fg: #ff319c;
+
+  /* font */
+  --title-font: "ABC Maxi Round";
+  --body-font: "Apple SD Gothic Neo";
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden; /* 가로 스크롤 방지 */
+}
+
+/* ===== 핑크 프레임(main) ===== */
+main {
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+  padding: 15px; /* 프레임 두께 = 좌·우 여백 15px */
+  box-sizing: border-box;
+  background: var(--fg);
+}
+
+/* ===== 좌측 상단 핑크 네모 ===== */
+.corner-block {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  width: 28px;
+  height: 69px;
+  background: var(--fg);
+  z-index: 2;
+}
+
+/* ===== 홈 스테이지 (안쪽 회색 라운딩 화면) ===== */
+.stage {
+  position: relative;
+  width: 100%;
+  margin: 0;
+  background: var(--bg);
+  border-radius: 0 40px 40px 40px;
+
+  display: flex;
+  flex-direction: column; /* 세로 배치 */
+  align-items: stretch; /* 내부 요소 폭 100% */
+  gap: 1px;
+  padding-top: 80px; /* 버튼과 상단 콘텐츠 간 공간 */
+  padding-bottom: 40px;
+  box-sizing: border-box;
+}
+
+.btn-close {
+  position: absolute;
+  width: 21.91px;
+  height: 21.91px;
+  top: 39px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* 🔽 기본 버튼 스타일 제거 */
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.btn-close img {
+  width: 100%;
+  height: 100%;
+}
+/* ===== 상단/하단 크레딧 이미지 (info-credit, footer-credit) ===== */
+/* 1. 중앙 정렬 + 양쪽 여백 15px, 화면 폭 늘어나면 같이 늘어남 */
+.info-credit {
+  display: block;
+  max-width: calc(100% - 30px); /* 좌우 15px */
+  margin: 0 auto;
+  margin-top: 5px;
+}
+.footer-credit {
+  display: block;
+  max-width: calc(100% - 30px); /* 좌우 15px */
+  margin: 0 auto;
+}
+
+/* ===== 공통 텍스트 블록 여백 ===== */
+/* 3. text/credit/thanksto/link는 항상 좌측 39px에서 시작 */
+.text-wrap,
+.credit-wrap,
+.thanksto-wrap,
+.link-wrap,
+.image-wrap {
+  box-sizing: border-box;
+  padding-left: 24px;
+  padding-right: 23px; /* 오른쪽은 살짝 여백 */
+}
+
+/* ===== 소개 텍스트 ===== */
+.text-wrap {
+  margin-top: 14px;
+  margin-bottom: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  font-size: 14px;
+  line-height: 1.5;
+  word-break: keep-all;
+  color: var(--fg);
+  letter-spacing: -0.25px;
+  font-weight: 600;
+}
+
+.text-wrap p {
+  margin: 0;
+}
+
+.text-en {
+  font-size: 15px;
+  line-height: 1.25;
+  word-break: keep-all;
+  font-weight: 500;
+  letter-spacing: -0.15px;
+}
+
+/* ======================
+   크레딧 테이블
+   ====================== */
+
+.credit-title {
+  color: var(--fg);
+  font-family: "ABC Maxi Round";
+  font-size: 18px;
+  letter-spacing: -0.15px;
+  margin-bottom: 8px;
+}
+
+/* credit-wrap 폭 전체 사용 + 필요 시 가로 스크롤 */
+.credit-wrap {
+  width: 100%;
+  overflow-x: auto;
+}
+
+/* 이름+인스타 한 셀에 들어가도 너무 찌그러지지 않게 */
+.credit-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  color: var(--fg);
+  line-height: 1.2;
+  font-weight: 600;
+  table-layout: fixed;
+  min-width: 280px; /* 필요하면 더 줄여도 됨 */
+}
+
+/* 열 너비: 1열(역할) / 2열(이름+인스타) */
+.credit-table .col-role {
+  width: 50%;
+}
+.credit-table .col-name {
+  width: 50%;
+}
+
+/* th, td 공통 */
+.credit-table th,
+.credit-table td {
+  text-align: left;
+  vertical-align: top;
+  padding: 2px 0;
+}
+
+/* 1열(부서명) 스타일 – bold + 오른쪽 여백 */
+.credit-table th {
+  font-weight: 700;
+  padding-right: 16px;
+}
+
+/* 2열(이름+인스타) 오른쪽 여백 + 한 줄 유지(가능하면) */
+.credit-table td:nth-child(2) {
+  padding-right: 16px;
+  white-space: nowrap;
+}
+
+/* 인스타 링크 기본 스타일 */
+.credit-table a {
+  color: #ff319c;
+  text-decoration: underline;
+}
+.credit-table a:hover {
+  text-decoration: none;
+}
+
+/* 인스타 핸들 전용 여백 */
+.credit-table .instagram {
+  margin-left: 4px; /* 이름과 간격 */
+}
+
+/* 부서 섹션 사이 간격 */
+.credit-table tr.section-start th,
+.credit-table tr.section-start td {
+  padding-top: 14px;
+}
+
+/* ======================
+   Special Thanks
+   ====================== */
+
+.thanksto-title {
+  color: var(--fg);
+  font-family: "ABC Maxi Round";
+  font-size: 18px;
+  letter-spacing: -0.15px;
+  margin-bottom: 8px;
+}
+
+.thanksto-wrap {
+  width: 100%;
+  margin-top: 32px;
+}
+
+/* 🔥 table과 같은 50% / 50% 레이아웃 */
+.thanksto-inner {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  align-items: flex-start;
+  column-gap: 0; /* 테이블처럼 컬럼 사이 공백 없음 */
+}
+
+/* 왼쪽 라벨: width 지정 필요 없음 */
+.thanksto-label {
+  font-size: 14px;
+  letter-spacing: -0.15px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--fg);
+  padding-right: 16px; /* th의 padding-right와 맞춤 */
+}
+
+/* 오른쪽 콘텐츠: 세로로 폰트명 / 로고 / 링크 나열 */
+.thanksto-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 14px;
+  letter-spacing: -0.2px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.thanksto-font-name {
+  margin: 0;
+  font-weight: 700;
+  color: var(--fg);
+}
+
+.thanksto-logo {
+  display: block;
+  max-width: 109px;
+  height: auto;
+}
+
+.thanksto-link {
+  color: var(--fg);
+  text-decoration: underline;
+}
+
+/* ======================
+   링크 영역
+   ====================== */
+
+.link-wrap {
+  font-size: 14px;
+  letter-spacing: -0.15px;
+  font-weight: 700;
+  line-height: 1.4;
+  color: var(--fg);
+  margin-top: 10px;
+}
+
+.link,
+.link:visited,
+.link:hover,
+.link:active {
+  color: var(--fg);
+  text-decoration: underline;
+}
+
+.image-wrap {
+  margin-top: 17px;
+  display: flex;
+  flex-direction: column; /* 수직으로 쌓기 */
+  gap: 9px;
+}
+
+/* 이미지 리스트 */
+.image-wrap img {
+  /* display: block;
+  max-width: calc(100% - 54px); 
+  margin-bottom: 8px; */
+  width: 100%;
+  height: auto;
+}
+
+.footer-credit {
+  margin-top: 73px;
+}

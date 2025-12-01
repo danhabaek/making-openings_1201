@@ -1,0 +1,213 @@
+/* =========================
+   Font & Root
+   ========================= */
+@font-face {
+  font-family: "ABC Maxi Round";
+  src: url("../assets/fonts/ABCMaxiRound-Bold.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "ABC Maxi Round-regular";
+  src: url("../assets/fonts/ABCMaxiRound-Regular.woff2") format("woff2");
+}
+
+:root {
+  /* color */
+  --bg: #e6e7e8;
+  --fg: #ff319c;
+  --pad: 18px; /* 🔹 좌우 여백 18px 고정 */
+
+  /* font */
+  --title-font: "ABC Maxi Round";
+  --body-font: "Apple SD Gothic Neo";
+
+  /* 💡 방명록 내용 폰트: 여기서 변경 가능 */
+  --content-font: var(--body-font);
+}
+
+/* =========================
+   Reset & Base
+   ========================= */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+body {
+  font-family: var(--body-font);
+  color: var(--bg);
+  background: var(--bg);
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+button {
+  border: none;
+  padding: 0;
+  margin: 0;
+  background: none;
+  cursor: pointer;
+}
+
+/* =========================
+   Layout: Header & Main
+   ========================= */
+header {
+  padding: 50px var(--pad) 0;
+  position: relative; /* btn-close 위치 기준 */
+}
+
+main {
+  /* 💡 화면 폭에 따라 확장되도록 max-width 제거됨 */
+  margin: 0 auto;
+  padding: 16px 0px 40px; /* 🔹 좌우 여백 18px 유지 */
+  width: 100%; /* 폭 확보 */
+}
+
+/* =========================
+   Header (닫기 버튼)
+   ========================= */
+.btn-close {
+  position: absolute;
+  width: 21.91px;
+  height: 21.91px;
+  top: 47px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* 🔽 기본 버튼 스타일 제거 */
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.btn-close img {
+  width: 100%;
+  height: 100%;
+}
+
+/* =========================
+   Title
+   ========================= */
+main h1 {
+  color: var(--fg);
+  font-family: "ABC Maxi Round";
+  font-size: 20px;
+  line-height: 1;
+  padding: 16px 22px 20px;
+  line-height: 1.5;
+}
+main h1 span.project-title {
+  font-size: 30px;
+}
+
+/* =========================
+   Guestbook List
+   ========================= */
+ul#list {
+  /* 💡 수정: max-width 390px 제거. 화면 폭을 모두 사용하도록 함. */
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* 🔹 보드 사이 간격 10px 유지 */
+  width: 100%;
+}
+li {
+  position: relative;
+  /* 💡 수정: li 자체의 패딩은 0으로 유지 */
+  padding: 0;
+  overflow: hidden;
+
+  /* 💡 핵심 수정: 가로/세로 비율을 390/140 (약 2.78:1)로 고정하여 높이 잘림 방지 */
+  /* SVG 원본 비율에 맞게 조정하세요. */
+  aspect-ratio: 390 * 1.5 / 140 * 1.5;
+
+  background-repeat: no-repeat;
+  background-position: top center;
+
+  /* 💡 배경이 li의 크기를 완벽하게 채우도록 수정 */
+  background-size: 100% 100%;
+}
+
+/* 🔹 래퍼에 Flexbox 적용 */
+.guestbook-wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  /* 💡 텍스트가 SVG 보드 중앙에 위치하도록 패딩을 백분율로 조정 (세로 중앙 정렬 효과) */
+  /* 가로 48px / 390px = 약 12.3% */
+  /* 세로 20px / 140px = 약 14.3% */
+  padding: 14% 12.3% 14% 12.3%;
+
+  /* 텍스트가 길어지면 li 높이도 늘어나야 하므로 min-height를 100%로 설정 */
+  min-height: 100%;
+}
+
+/* 방명록 텍스트 스타일 */
+.content-text {
+  font-family: var(--content-font);
+  font-size: 15.5px;
+  line-height: 1.6;
+  word-break: break-word;
+  color: var(--bg);
+  font-weight: semi-bold;
+
+  flex-grow: 1; /* 텍스트가 남은 공간을 차지하여 meta-bottom을 아래로 밀어냄 */
+  margin-bottom: 20px; /* 하단 메타데이터와의 간격 */
+  position: relative;
+  z-index: 1;
+}
+
+/* 4n+ 패턴 유지 */
+ul#list li:nth-child(2n + 1) {
+  background-image: url("../assets/svg/board1-guestbook.svg");
+}
+ul#list li:nth-child(2n + 2) {
+  background-image: url("../assets/svg/board2-guestbook.svg");
+}
+/* ul#list li:nth-child(4n + 3) {
+  background-image: url("../assets/svg/board3-guestbook.svg");
+}
+ul#list li:nth-child(4n + 4) {
+  background-image: url("../assets/svg/board4-guestbook.svg");
+} */
+
+/* 🔹 메타데이터 하단 영역 (날짜 + From. 이름) */
+.meta-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  font-size: 14px;
+  opacity: 1;
+  color: var(--bg);
+  font-family: "ABC Maxi Round-Regular";
+  position: relative;
+  z-index: 1;
+}
+
+.meta-from {
+  font-family: "ABC Maxi Round-Regular", "Pretendard";
+  font-weight: 500;
+}
+
+.empty {
+  opacity: 0.6;
+}
