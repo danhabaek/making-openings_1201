@@ -35,6 +35,24 @@
   const stage = document.getElementById("home");
   const splashEl = document.getElementById("splash");
   const splashLottie = document.getElementById("splash-lottie");
+  const homeInner = document.querySelector(".home-inner");
+
+  // ----- A) 홈 전체 스케일 조정 (info-home + icon-board 묶어서 축소) -----
+  function resizeHome() {
+    if (!stage || !homeInner) return;
+
+    const DESIGN_HEIGHT = 780; // CSS에서 .home-inner 기준 높이
+    const framePadding = 30; // main 상하 padding(15px * 2) 정도
+
+    const availableHeight = window.innerHeight - framePadding;
+    const scale = Math.min(availableHeight / DESIGN_HEIGHT, 1);
+
+    homeInner.style.transformOrigin = "top center";
+    homeInner.style.transform = `scale(${scale})`;
+  }
+
+  window.addEventListener("load", resizeHome);
+  window.addEventListener("resize", resizeHome);
 
   // ----- 0) 스플래시 처리 -----
   (function setupSplash() {
@@ -62,23 +80,24 @@
       path: "splash.json", // 🔹 스플래시 json 경로
     });
 
-    // 2초 후: 배경을 투명으로 → 아래 회색 배경이 보이게
     // 2.31초 후: 배경을 "회색 레이어"로 변경
     setTimeout(() => {
-      // CSS 변수에서 --bg(회색) 가져오기
       const rootStyles = getComputedStyle(document.documentElement);
       const gray = rootStyles.getPropertyValue("--bg") || "#e6e7e8";
 
-      splashEl.style.backgroundColor = gray.trim(); // 투명 X, 회색으로
+      splashEl.style.backgroundColor = gray.trim();
     }, 2310);
 
     function finishSplash() {
       if (!splashEl.classList.contains("is-active")) return;
 
       splashEl.classList.remove("is-active");
-      splashEl.style.display = "none"; // 🔹 회색 레이어도 같이 사라짐
+      splashEl.style.display = "none";
       stage.style.visibility = "visible";
       localStorage.setItem(SPLASH_KEY, "1");
+
+      // 스플래시 끝난 뒤에도 한 번 더 스케일 맞춰주기
+      resizeHome();
     }
 
     // 애니메이션 끝나면 스플래시 종료
@@ -134,13 +153,26 @@
     const stageRect = stageEl.getBoundingClientRect();
     const iconRect = icon.getBoundingClientRect();
 
-    const offsetX = iconRect.left - stageRect.left;
-    const offsetY = iconRect.top - stageRect.top;
+    const iconWidth = iconRect.width;
+    const iconHeight = iconRect.height;
+
+    // 기본 offset (stage 안에서의 위치)
+    let offsetX = iconRect.left - stageRect.left;
+    let offsetY = iconRect.top - stageRect.top;
+
+    // 🔥 offset을 stage 범위 안으로 강제로 잘라내기
+    //  -> 아이콘이 살짝 밖으로 나가도 항상 사진 영역 안에서만 잘리도록
+    const maxOffsetX = Math.max(stageRect.width - iconWidth, 0);
+    const maxOffsetY = Math.max(stageRect.height - iconHeight, 0);
+
+    offsetX = Math.min(Math.max(offsetX, 0), maxOffsetX);
+    offsetY = Math.min(Math.max(offsetY, 0), maxOffsetY);
 
     // 한 장짜리 배경처럼 보이도록: stage 전체 크기에 맞추고, 아이콘 위치만큼 이동
     fillEl.style.backgroundImage = `url('${bgUrl}')`;
     fillEl.style.backgroundSize = `${stageRect.width}px ${stageRect.height}px`;
     fillEl.style.backgroundPosition = `${-offsetX}px ${-offsetY}px`;
+    fillEl.style.backgroundRepeat = "no-repeat";
 
     const maskUrl = `assets/svg/icon${id}-fill.svg`;
     fillEl.style.webkitMaskImage = `url('${maskUrl}')`;

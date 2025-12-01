@@ -65,32 +65,43 @@ main {
 .stage {
   position: relative;
   width: 100%;
-  height: 100%;
+  height: calc(100dvh - 30px); /* 기존 값 그대로 */
   margin: 0;
   overflow: hidden;
-  background: var(--bg); /* 항상 회색 배경 */
+  background: var(--bg);
   border-radius: 0 40px 40px 40px;
-  height: calc(100dvh - 30px); /* 프레임 padding 계산 들어가면 조정 가능 */
+
+  display: flex;
+  justify-content: center; /* 가로 가운데 */
+  align-items: flex-start; /* 위쪽 기준 */
+}
+/* 피그마 기준 아트보드 사이즈 (필요하면 숫자 조금 조정 가능) */
+.home-inner {
+  position: relative;
+  width: 358px;
+  height: 760px; /* info-home + icon-board 전체 높이 기준 값 */
+  transform-origin: top center; /* 상단 중앙 기준으로 줄어들게 */
 }
 
 /* 🔥 아이콘 보드: 실제 아트보드 사이즈로 고정 */
 .icon-board {
-  position: relative; /* 안의 .icon absolute 기준 */
-  width: 358px; /* 피그마에서 본 그 값 */
-  height: 574px; /* 필요하면 조정 */
-  margin: 0 auto; /* 가로 가운데 정렬 */
-  margin-top: -90px;
+  position: relative;
+  width: 358px;
+  height: 574px; /* 기존 값 유지 */
+  margin: 0 auto;
+  margin-top: -90px; /* 기존 값 유지 (info-home 밑으로 살짝 겹치게 하고 싶으면 그대로) */
 }
 
 /* ===== 상단 인포 이미지 ===== */
 .info-home {
   display: block;
   width: 100%;
-  max-width: 358px; /* 🔥 icon-board와 같은 폭으로 고정 */
-  margin: 40px auto 0; /* 🔥 가운데 정렬 + 위에서 40px */
+  max-width: 358px;
+  margin: 40px auto 0; /* 위에서 40px, 중앙 정렬 */
   height: auto;
   z-index: 999;
 }
+
 /* ===== 아이콘 공통 ===== */
 .icon {
   position: absolute;
@@ -141,7 +152,7 @@ main {
 .credit {
   position: absolute;
   left: 14px;
-  bottom: 28px;
+  bottom: 0px;
   width: 170px;
   display: block;
   animation: bob 2s ease-in-out infinite;
