@@ -87,7 +87,7 @@ main {
   display: block;
   max-width: calc(100% - 30px); /* 좌우 15px */
   margin: 0 auto;
-  margin-top: 5px;
+  margin-top: 15px;
 }
 .footer-credit {
   display: block;
