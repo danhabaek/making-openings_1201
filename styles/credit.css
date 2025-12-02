@@ -54,7 +54,7 @@ main {
   flex-direction: column; /* 세로 배치 */
   align-items: stretch; /* 내부 요소 폭 100% */
   gap: 1px;
-  padding-top: 80px; /* 버튼과 상단 콘텐츠 간 공간 */
+  padding-top: 60px; /* 버튼과 상단 콘텐츠 간 공간 */
   padding-bottom: 40px;
   box-sizing: border-box;
 }
@@ -63,7 +63,7 @@ main {
   position: absolute;
   width: 21.91px;
   height: 21.91px;
-  top: 39px;
+  top: 24px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;

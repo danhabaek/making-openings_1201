@@ -82,7 +82,7 @@ main {
   position: absolute;
   width: 21.91px;
   height: 21.91px;
-  top: 47px;
+  top: 24px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -109,7 +109,7 @@ main h1 {
   font-family: "ABC Maxi Round";
   font-size: 20px;
   line-height: 1;
-  padding: 16px 22px 20px;
+  padding: 0px 22px 20px;
   line-height: 1.5;
 }
 main h1 span.project-title {
@@ -176,19 +176,12 @@ li {
   z-index: 1;
 }
 
-/* 4n+ 패턴 유지 */
 ul#list li:nth-child(2n + 1) {
   background-image: url("../assets/svg/board1-guestbook.svg");
 }
 ul#list li:nth-child(2n + 2) {
   background-image: url("../assets/svg/board2-guestbook.svg");
 }
-/* ul#list li:nth-child(4n + 3) {
-  background-image: url("../assets/svg/board3-guestbook.svg");
-}
-ul#list li:nth-child(4n + 4) {
-  background-image: url("../assets/svg/board4-guestbook.svg");
-} */
 
 /* 🔹 메타데이터 하단 영역 (날짜 + From. 이름) */
 .meta-bottom {

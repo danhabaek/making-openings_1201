@@ -8,11 +8,11 @@
 
 :root {
   /* color */
-  --fg-pink: #ff319c; /* 버튼 배경색 */
-  --fg-white: #e6e7e8; /* 텍스트 및 보더 색상 */
+  --fg-pink: #ff319c;
+  --fg-white: #e6e7e8;
 
   /* size */
-  --pad: 22px; /* 좌우 여백 22px 고정 */
+  --pad: 22px;
 
   /* font */
   --title-font: "ABC Maxi Round";
@@ -28,8 +28,7 @@
 *::after {
   box-sizing: border-box;
 }
-
-html,
+ㄹ html,
 body {
   margin: 0;
   padding: 0;
@@ -84,7 +83,7 @@ main {
   position: absolute;
   width: 25px;
   height: 22px;
-  top: 51px;
+  top: 24px;
   left: 23px;
 }
 
@@ -92,7 +91,7 @@ main {
    To. (순서: 1)
    ========================= */
 .to {
-  margin-top: 52px;
+  margin-top: 24px;
   color: var(--fg-white);
   font-family: var(--title-font);
   font-size: 20px;
@@ -115,6 +114,7 @@ main {
   position: relative; /* name-wrap의 absolute 기준 */
   z-index: 1;
   width: 100%;
+  height: auto;
   background-image: url("../assets/svg/board-guest-contents.svg");
   background-size: 100% auto; /* 세로 높이를 자동으로 키움 */
   background-repeat: no-repeat;
@@ -131,23 +131,14 @@ main {
   background: none;
   border: none;
   outline: none;
-  /* padding: 24px; */
   box-sizing: border-box;
   resize: none;
   font-family: inherit;
   font-size: 16px;
   line-height: 1.6;
   color: var(--fg-pink);
-  /* margin-top: 48px;
-  margin-left: 30px;
-  margin-right: 30px; */
   word-break: keep-all;
-  overflow-y: auto;
-  scrollbar-width: none; /* Firefox */
-}
-
-.content::-webkit-scrollbar {
-  display: none; /* Chrome, Safari */
+  overflow-y: visible;
 }
 
 /* =========================
@@ -172,7 +163,7 @@ main {
   border: 2pt solid var(--fg-white);
   z-index: 999;
   position: absolute;
-  top: 478px; /* 원하는 만큼 위로 올림 */
+  top: 448px; /* 원하는 만큼 위로 올림 */
   right: 10px; /* 기존 align-self: flex-end 역할 대신 */
   z-index: 10; /* 텍스트 영역보다 위 */
 }

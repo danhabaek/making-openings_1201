@@ -24,9 +24,7 @@
         <span class="project-title"></span>
       </h1>
 
-      <ul id="list">
-        <!-- JS가 데이터를 로드하여 여기에 리스트 항목을 삽입합니다. -->
-      </ul>
+      <ul id="list"></ul>
 
       <!-- 방명록이 없을 때 메시지 -->
       <p class="empty" id="empty" style="display: none">
@@ -34,11 +32,8 @@
       </p>
     </main>
 
-    <!-- 🚨 주의: 아래 두 스크립트 태그는 사용자 환경에 따라 Supabase 클라이언트가 정의되도록 필요합니다. -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="../scripts/client.js"></script>
-
-    <!-- 분리된 JS 파일 연결 -->
     <script src="../scripts/guestbook.js"></script>
   </body>
 </html>
