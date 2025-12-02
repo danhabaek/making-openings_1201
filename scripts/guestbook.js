@@ -1,6 +1,3 @@
-// 🚨 사용자 요청에 따라 이전 Supabase 코드를 그대로 유지합니다.
-// 이 코드는 전역적으로 'client' 변수가 Supabase 인스턴스로 정의되어 있어야 정상 작동합니다.
-
 (function () {
   const db = client; // client 변수가 Supabase 인스턴스라고 가정합니다.
   const params = new URLSearchParams(location.search);
