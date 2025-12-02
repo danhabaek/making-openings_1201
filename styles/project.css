@@ -271,6 +271,7 @@ main {
   display: flex;
   flex-direction: column; /* 수직으로 쌓기 */
   gap: 10px;
+  margin-bottom: 15px;
 }
 
 .image-wrap img {
