@@ -1,7 +1,5 @@
 // scripts/credit.js
 (() => {
-  const PLAY_WINDOW_END = 6; // ✅ 0~6초만 재생
-
   const slider = document.querySelector(".video-carousel");
   if (!slider) return;
 
@@ -29,52 +27,36 @@
   };
 
   /**
-   * ✅ 항상 A/B/C 모두 0초에서 동시에 시작
+   * ✅ A/B/C 모두 0초에서 동시에 시작
+   * ✅ 이후에는 영상 자체 loop로 반복 (추가 제어 없음)
    */
   const startVideosSync = async () => {
-    videos.forEach((v) => v.pause());
+    // 전부 잠깐 멈추고 0초로 정렬
+    videos.forEach((v) => {
+      try {
+        v.pause();
+      } catch (e) {}
+    });
 
-    // 전부 0초로 맞춘 뒤 동시에 재생
     await Promise.all(videos.map((v) => safeSetTime(v, 0)));
     await Promise.allSettled(videos.map((v) => v.play()));
   };
 
-  /**
-   * ✅ 0~6초 구간만 재생하는 수동 루프
-   * - 각 비디오가 6초에 도달하면 0초로 돌아가 재생
-   */
-  const enableTrimLoop = () => {
-    const resetting = new WeakMap();
+  // ✅ loop 속성이 HTML에 없을 수도 있으니 JS에서 강제
+  videos.forEach((v) => {
+    v.loop = true;
+    v.muted = true; // autoplay 안정성
+    v.playsInline = true;
+    v.setAttribute("playsinline", "");
+    v.setAttribute("webkit-playsinline", "");
+  });
 
-    videos.forEach((v) => {
-      v.addEventListener("timeupdate", async () => {
-        if (!Number.isFinite(v.currentTime)) return;
-        if (resetting.get(v)) return;
-
-        if (v.currentTime >= PLAY_WINDOW_END) {
-          resetting.set(v, true);
-
-          try {
-            v.pause();
-          } catch (e) {}
-
-          await safeSetTime(v, 0);
-          v.play().catch(() => {});
-
-          setTimeout(() => resetting.set(v, false), 80);
-        }
-      });
-    });
-  };
-
-  enableTrimLoop();
-
-  // ✅ 초기 시작(동시 시작)
+  // 초기 동시 시작
   startVideosSync();
 
   /**
    * ✅ iOS autoplay unlock
-   * - 시간 건드리지 않고 play만 재시도
+   * - 시간/seek 건드리지 않고 play만 재시도
    */
   let unlocked = false;
   const unlock = async () => {
