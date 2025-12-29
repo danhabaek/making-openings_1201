@@ -1,12 +1,11 @@
 (() => {
-  const LOOP = 6; // 0~6초
-  const RESYNC_EPS = 0.08; // 80ms 이상 어긋나면 보정
-  const TICK_MS = 200; // 200ms마다 동기 체크(너무 촘촘하면 부담)
+  const LOOP = 6;
+  const RATE_EPS = 0.04; // playbackRate 조정 폭 (±4% 이내)
+  const SOFT_SYNC_EPS = 0.12; // 120ms 이상 어긋나면 속도로 보정
+  const HARD_SYNC_EPS = 0.35; // 350ms 이상이면 루프 때 강제 재동기
+  const TICK_MS = 250;
 
-  const track = document.querySelector(".video-track");
-  if (!track) return;
-
-  const videos = Array.from(track.querySelectorAll("video.teaser-video"));
+  const videos = Array.from(document.querySelectorAll("video.teaser-video"));
   if (!videos.length) return;
 
   const waitMeta = (v) =>
@@ -19,89 +18,112 @@
     try {
       const p = v.play();
       if (p && typeof p.then === "function") await p;
-    } catch (_) {
-      // iOS/인앱에서 막힐 수 있음 (unlock에서 다시 시도)
-    }
+    } catch (_) {}
   };
 
   const safeSetTime = async (v, t) => {
     await waitMeta(v);
     try {
-      const dur = Number.isFinite(v.duration) ? v.duration : null;
-      const clamped = dur
-        ? Math.min(Math.max(t, 0), Math.max(dur - 0.05, 0))
-        : Math.max(t, 0);
-      v.currentTime = clamped;
+      v.currentTime = Math.max(0, t);
     } catch (_) {}
   };
 
-  // ✅ 공통 기준 시계
-  let t0 = 0;
-  let running = false;
-  let timer = null;
+  // ✅ 기준 비디오(첫 번째)를 “마스터”로 삼음 (가장 간단/안정)
+  const master = videos[0];
 
-  const start = async () => {
-    running = true;
-    t0 = performance.now();
-
-    // 동시에 시작 시도: 0초로 맞추고 플레이
+  const startAll = async () => {
+    // 한번만 0초로 맞추고 시작 (여기서는 끊겨도 상관 없음 — 최초 1회)
     await Promise.all(videos.map((v) => safeSetTime(v, 0)));
     await Promise.allSettled(videos.map((v) => safePlay(v)));
-
-    // 주기적으로 드리프트 보정 + 6초 루프 강제
-    clearInterval(timer);
-    timer = setInterval(async () => {
-      if (!running) return;
-
-      const t = ((performance.now() - t0) / 1000) % LOOP;
-
-      // 어떤 비디오가 멈췄으면 재생 재시도
-      videos.forEach((v) => {
-        if (v.paused && !v.ended) safePlay(v);
-      });
-
-      // 드리프트가 큰 것만 보정 (너무 자주 건드리면 끊겨 보여서 임계값 사용)
-      await Promise.all(
-        videos.map(async (v) => {
-          if (!Number.isFinite(v.currentTime)) return;
-          const diff = Math.abs(v.currentTime - t);
-          if (diff > RESYNC_EPS) {
-            await safeSetTime(v, t);
-          }
-        })
-      );
-    }, TICK_MS);
   };
 
-  const stop = () => {
-    running = false;
-    clearInterval(timer);
-    timer = null;
+  const hardResyncAtLoop = async () => {
+    // 루프에서만 “다 같이” 리셋 (재생 중간엔 currentTime 건드리지 않기)
+    videos.forEach((v) => {
+      try {
+        v.pause();
+      } catch (_) {}
+    });
+    await Promise.all(videos.map((v) => safeSetTime(v, 0)));
+    await Promise.allSettled(videos.map((v) => safePlay(v)));
   };
 
-  // ✅ iOS autoplay unlock: 사용자 터치 후 재시작/재시도
+  // ✅ 루프 감지: master 기준으로 0~6 반복
+  let lastT = 0;
+
+  const tick = async () => {
+    if (!Number.isFinite(master.currentTime)) return;
+
+    const t = master.currentTime % LOOP;
+
+    // 6초 넘어가는 루프 순간 감지 (t가 갑자기 작아짐)
+    const looped = lastT > LOOP - 0.25 && t < 0.25;
+    lastT = t;
+
+    // 멈춘 애 있으면 play 재시도
+    videos.forEach((v) => {
+      if (v.paused && !v.ended) safePlay(v);
+    });
+
+    // 루프 구간: “강제 동기화”는 여기서만
+    if (looped) {
+      // 루프 직전에 drift가 심했던 경우에만 하드 리셋
+      let worst = 0;
+      for (const v of videos) {
+        if (!Number.isFinite(v.currentTime)) continue;
+        const diff = Math.abs((v.currentTime % LOOP) - t);
+        worst = Math.max(worst, diff);
+      }
+      if (worst > HARD_SYNC_EPS) {
+        await hardResyncAtLoop();
+        return;
+      }
+    }
+
+    // ✅ 평소엔 seek 금지! playbackRate만 살짝 조정
+    for (const v of videos) {
+      if (v === master) continue;
+      if (!Number.isFinite(v.currentTime)) continue;
+
+      const vt = v.currentTime % LOOP;
+      let diff = vt - t;
+      // -3~+3 범위로 접히는 형태(루프 경계 고려)
+      if (diff > LOOP / 2) diff -= LOOP;
+      if (diff < -LOOP / 2) diff += LOOP;
+
+      if (Math.abs(diff) < SOFT_SYNC_EPS) {
+        v.playbackRate = 1.0;
+      } else {
+        // diff가 +면 v가 “앞서감” → 조금 느리게
+        // diff가 -면 v가 “늦음” → 조금 빠르게
+        const rate = 1.0 - Math.max(-RATE_EPS, Math.min(RATE_EPS, diff * 0.08));
+        v.playbackRate = rate;
+      }
+    }
+  };
+
+  startAll();
+
+  const timer = setInterval(tick, TICK_MS);
+
+  // iOS unlock
   let unlocked = false;
   const unlock = async () => {
     if (unlocked) return;
     unlocked = true;
-    await start();
+    await Promise.allSettled(videos.map((v) => safePlay(v)));
     window.removeEventListener("touchstart", unlock);
     window.removeEventListener("pointerdown", unlock);
   };
-
   window.addEventListener("touchstart", unlock, { passive: true });
   window.addEventListener("pointerdown", unlock, { passive: true });
 
-  // 최초 시도(안 되면 unlock에서 다시 잡힘)
-  start();
-
-  // 탭 복귀 시 재동기화
   document.addEventListener("visibilitychange", () => {
-    if (document.visibilityState === "visible") start();
-    else stop();
+    if (document.visibilityState === "visible") {
+      Promise.allSettled(videos.map((v) => safePlay(v)));
+    }
   });
 
-  // iOS 전체화면 방지
   videos.forEach((v) => {
     v.addEventListener("click", (e) => {
       e.preventDefault();
