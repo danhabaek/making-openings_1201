@@ -328,19 +328,13 @@ main {
   display: none;
 }
 
-/* 카드 크기 = 페이지 내 표시 크기 (180×320)
-   - 오른쪽 다음 영상이 일부 보이게 하려면
-     track에서 한 카드가 화면 폭보다 작아야 함 */
 .video-card {
   flex: 0 0 auto;
   width: 180px;
   height: 320px;
-
-  /* background: #777; */
   overflow: hidden;
-
-  /* ✅ 슬라이드 스냅 포인트 */
   scroll-snap-align: start;
+  border: 1px solid var(--fg);
 }
 
 /* ✅ 원본 비율 유지 + 위/아래 잘림 방지 */
@@ -357,7 +351,7 @@ main {
   margin-top: 17px;
   display: flex;
   flex-direction: column; /* 수직으로 쌓기 */
-  gap: 9px;
+  gap: 10px;
 }
 
 /* 이미지 리스트 */
