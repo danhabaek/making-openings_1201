@@ -100,8 +100,7 @@ main {
 .text-wrap,
 .credit-wrap,
 .thanksto-wrap,
-.link-wrap,
-.image-wrap {
+.link-wrap {
   box-sizing: border-box;
   padding-left: 24px;
   padding-right: 23px; /* 오른쪽은 살짝 여백 */
@@ -348,10 +347,12 @@ main {
 }
 
 .image-wrap {
-  margin-top: 17px;
+  margin-top: 14px;
   display: flex;
   flex-direction: column; /* 수직으로 쌓기 */
-  gap: 10px;
+  gap: 9px;
+  padding-left: 17px;
+  padding-right: 17px;
 }
 
 /* 이미지 리스트 */
